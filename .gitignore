@@ -1,0 +1,55 @@
+# ============================================================
+# .gitignore — Envio Ativo VOXI (padrão Python)
+# ============================================================
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# ---- Ambientes virtuais ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- Testes / cobertura / type-check ----
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.test_output/
+
+# ---- Segredos e configuração local ----
+# Convenção do padrão (PROJETO.md §6): .env nunca versionado.
+# Obs.: o .env já rastreado permanece rastreado até um `git rm --cached .env`
+# (ver ressalva RS-03 / decisão D-13). O modelo .env.example continua no Git.
+.env
+.env.*
+!.env.example
+
+# ---- Saída e logs do robô ----
+# NÃO usar `*.log` global: os logs de evidência em docs/evidencias/ são versionados.
+logs/
+output/
+debug_output/
+debug_output_refatorado/
+debug_por_carteira/
+
+# ---- Claude Code (local, não versionado) ----
+CLAUDE.md
+.claude/
+
+# ---- Sistema operacional / editores ----
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~

@@ -1,0 +1,149 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "1. TESTE SMB - grava no .71, sem SFTP e sem DAILY",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "scripts.executar_voxi",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--carteira",
+                "${input:carteiraVoxi}",
+                "--dry-run",
+                "--debug"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "VOXI_OUTPUT_DIR": "\\\\10.0.0.71\\d\\Automacao\\VOXI"
+            }
+        },
+        {
+            "name": "2. TESTE SFTP - envia e não grava DAILY",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "scripts.executar_voxi",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--carteira",
+                "${input:carteiraVoxi}",
+                "--sem-registro",
+                "--debug"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "VOXI_OUTPUT_DIR": "\\\\10.0.0.71\\d\\Automacao\\VOXI"
+            }
+        },
+        {
+            "name": "3. PRODUÇÃO - envia SFTP e grava DAILY",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "scripts.executar_voxi",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--carteira",
+                "${input:carteiraVoxi}",
+                "--debug"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "VOXI_OUTPUT_DIR": "\\\\10.0.0.71\\d\\Automacao\\VOXI"
+            }
+        },
+        {
+            "name": "4. REMESSAS - localizar sem enviar",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "scripts.executar_remessas",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--carteira",
+                "${input:carteiraRemessa}",
+                "--dry-run",
+                "--debug"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "ROBO_CARGAS_ROOT": "C:\\Robos\\RoboCargas"
+            }
+        },
+        {
+            "name": "3B. PRODUCAO - ignora validacao da carga",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "scripts.executar_voxi",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--carteira",
+                "${input:carteiraVoxiSemValidacaoCarga}",
+                "--ignorar-validacao-carga",
+                "--debug"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "VOXI_OUTPUT_DIR": "\\\\10.0.0.71\\d\\Automacao\\VOXI"
+            }
+        },
+        {
+            "name": "5. REMESSAS PRODUCAO - localizar e enviar",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "scripts.executar_remessas",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--carteira",
+                "${input:carteiraRemessa}",
+                "--debug"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "ROBO_CARGAS_ROOT": "C:\\Robos\\RoboCargas"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "carteiraVoxi",
+            "type": "promptString",
+            "description": "ID_CEDENTE ou nome do cedente cadastrado em DB_SFTP.dbo.TB_CARTEIRA_VOXI, ou 'todas'",
+            "default": "todas"
+        },
+        {
+            "id": "carteiraRemessa",
+            "type": "pickString",
+            "description": "Escolha a carteira de remessa",
+            "options": [
+                "todas",
+                "pi",
+                "mu",
+                "teta_imob",
+                "teta_swat",
+                "teta_consumer",
+                "beta",
+                "zeta",
+                "pag",
+                "nu"
+            ],
+            "default": "todas"
+        },
+        {
+            "id": "carteiraVoxiSemValidacaoCarga",
+            "type": "promptString",
+            "description": "ID_CEDENTE ou nome do cedente cadastrado em TB_CARTEIRA_VOXI (nao aceita 'todas' neste modo)",
+            "default": "zeta"
+        }
+    ]
+}
